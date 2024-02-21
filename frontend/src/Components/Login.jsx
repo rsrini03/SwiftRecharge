@@ -46,7 +46,7 @@ export default function Login() {
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
-              <div>
+              <div> 
                 <label htmlFor="userName" className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Email/UserName
@@ -64,7 +64,6 @@ export default function Login() {
                   />
                 </div>
               </div>
-
               {errors.userName && touched.userName ? (
                 <p style={{ color: "red" }}>{errors.userName}</p>
               ) : null}

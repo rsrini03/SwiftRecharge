@@ -19,14 +19,16 @@ const Header = () => {
     return (
         <header className="absolute inset-x-0 top-0 z-50">
             <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
-                    <a href="#" className="-m-1.5 p-1.5">
-                        <span className="sr-only">Your Company</span>
+                <div className="flex lg:flex-1 items-center">
+                    <a href="/" className="-m-1.5 p-1.5 flex items-center">
+                        <span className="sr-only">SwiftRecharge</span>
                         <img
-                            width={50}
+                            className="h-8 w-auto"
                             src="/assets/recharge-icon.png"
-                            alt="logo"
+                            alt=""
+                            
                         />
+                        <span className="ml-2 text-lg font-bold"><i>SWIFT</i><span className='text-teal-600'><i>RECHARGE</i></span></span>
                     </a>
                 </div>
                 <div className="flex lg:hidden">
@@ -63,6 +65,7 @@ const Header = () => {
                                 src="/assets/recharge-icon.png"
                                 alt=""
                             />
+                            <span className="ml-2 text-lg font-bold">SwiftRecharge</span>
                         </a>
                         <button
                             type="button"
