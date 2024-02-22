@@ -21,9 +21,9 @@ export default function Hero() {
             <Header />
             <div className="relative isolate px-6 pt-14 lg:px-8" style={{
                 backgroundImage: "url(/assets/bbblurry.svg)",
-                backgroundRepeat:"no-repeat",
-                backgroundSize:"cover",
-                minHeight:"100vh"
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                minHeight: "100vh"
             }}>
                 <div
                     className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -39,7 +39,7 @@ export default function Hero() {
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-[100px]">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                         <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                            Announcing our next round of funding.{' '}
+                            Never Miss a Beat with Our Recharge Plans{' '}
                             <a href="#" className="font-semibold text-teal-600">
                                 <span className="absolute inset-0" aria-hidden="true" />
                                 Read more <span aria-hidden="true">&rarr;</span>
