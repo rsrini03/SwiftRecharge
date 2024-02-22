@@ -1,8 +1,8 @@
 import React from "react"
 import { useNavigate } from "react-router"
-import { SignInSchema } from "../Schemas/SignInSchema";
+import { SignInSchema } from "../../Schemas/SignInSchema";
 import { useFormik } from "formik"
-import Header from "./Header";
+import Header from "../Header";
 
 
 export default function Login() {
@@ -34,7 +34,6 @@ export default function Login() {
         backgroundSize: "cover",
         minHeight:"100vh"
       }}>
-        <Header/>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <img class="mx-auto h-10 w-auto" src="/assets/recharge-icon.png" alt="Your Company" />
 
@@ -92,7 +91,7 @@ export default function Login() {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
                 >
                   Sign in
                 </button>

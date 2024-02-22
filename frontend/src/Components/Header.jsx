@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { boolean } from 'yup'
+import DropdownMenu from './Pages/DropDown'
 
 const Header = () => {
 
@@ -9,12 +11,13 @@ const Header = () => {
         { name: 'Available Plans', href: '#' },
         { name: 'Features', href: '#' },
         { name: 'Marketplace', href: '#' },
-        { name: 'Profile', href:"/profile" },
+        { name: 'Profile', href: "/profile" },
     ]
 
     const navigate = useNavigate();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    var email = false;
 
     return (
         <header className="absolute inset-x-0 top-0 z-50">
@@ -26,7 +29,7 @@ const Header = () => {
                             className="h-8 w-auto"
                             src="/assets/recharge-icon.png"
                             alt=""
-                            
+
                         />
                         <span className="ml-2 text-lg font-bold"><i>SWIFT</i><span className='text-teal-600'><i>RECHARGE</i></span></span>
                     </a>
@@ -48,11 +51,18 @@ const Header = () => {
                         </a>
                     ))}
                 </div>
-                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a onClick={() => navigate("/login")} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer">
-                        Log in <span aria-hidden="true">&rarr;</span>
-                    </a>
-                </div>
+                {
+                    email == false ? (
+                        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                            <a onClick={() => navigate("/login")} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer">
+                                Log in <span aria-hidden="true">&rarr;</span>
+                            </a>
+                        </div>
+
+                    ) : (
+                        <DropdownMenu/>
+                    )
+                }
             </nav>
             <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                 <div className="fixed inset-0 z-50" />

@@ -1,9 +1,9 @@
 import React from "react"
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { SignUpSchema } from "../Schemas/SignUpSchema";
+import { SignUpSchema } from "../../Schemas/SignUpSchema";
 import Login from "./Login";
-import Header from "./Header";
+import Header from "../Header";
 export default function SignUp() {
 
     const navigate = useNavigate();
@@ -34,7 +34,6 @@ export default function SignUp() {
                 backgroundSize: "cover",
                 minHeight: "100vh"
             }}>
-                <Header/>
                 <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
                     <img class="mx-auto h-10 w-auto" src="/assets/recharge-icon.png" alt="Your Company" />
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">

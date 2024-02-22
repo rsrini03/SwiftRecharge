@@ -1,24 +1,47 @@
-import './input.css'
-import Home from './Components/Home'
-import { Routes, BrowserRouter, Route } from 'react-router-dom'
-import Login from './Components/Login'
-import SignUp from './Components/SignUp'
-import Profile from './Components/Profile'
+import './input.css';
+import React, { Suspense, lazy } from 'react';
+import Loader from './Components/Loader';
+import UserLayout from './Layout/UserLayout';
+import DashBoard from './Components/Pages/admin/DashBoard';
+import { Routes, Route } from 'react-router-dom';
+import DropDown from './Components/Pages/DropDown';
+
+const LazyHome = lazy(() => import('./Components/Pages/Home'));
+const LazySignin = lazy(() => import('./Components/Pages/Login'));
+const LazySignup = lazy(() => import('./Components/Pages/SignUp'));
+const LazyProfile = lazy(() => import('./Components/Pages/Profile'));
 
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
+    <DelayedFallback>
+      <Suspense fallback={<Loader />}>
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login/>}/>
-          <Route exact path="/signup" element={<SignUp/>}/>
-          <Route exact path="/profile" element={<Profile/>}/>
+          <Route exact path="/" element={<UserLayout component={LazyHome} />} />
+          <Route path="/profile" element={<UserLayout component={LazyProfile} />} />
+          <Route path="/login" element={<UserLayout component={LazySignin} />} />
+          <Route path="/signup" element={<UserLayout component={LazySignup} />} />
+          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/drop" element = {<DropDown/>}/>
         </Routes>
-      </BrowserRouter>
-    </>
-  )
+      </Suspense>
+    </DelayedFallback>
+  );
 }
 
-export default App
+// Component for delaying the fallback
+const DelayedFallback = ({ children }) => {
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // Simulating a delay of 1.5 seconds before setting loading to false
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return loading ? <Loader /> : children;
+};
+
+export default App;

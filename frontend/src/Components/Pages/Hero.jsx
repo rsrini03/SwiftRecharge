@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Header from './Header'
-import Type from './Type'
+import Header from '../Header'
+import Type from '../Type'
 
 const navigation = [
     { name: 'Product', href: '#' },
