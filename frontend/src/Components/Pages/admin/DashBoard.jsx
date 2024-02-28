@@ -8,8 +8,12 @@ const DashBoard = () => {
 
   return (
     <div className='flex'>
-      <SideBar setActiveLink={setActiveLink} />
-      <Content activeLink={activeLink} />
+      <div className='w-[20VW]'>
+        <SideBar setActiveLink={setActiveLink} />
+      </div>
+      <div className='w-full'>
+        <Content activeLink={activeLink} />
+      </div>
     </div>
   )
 }

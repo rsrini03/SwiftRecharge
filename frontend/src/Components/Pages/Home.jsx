@@ -4,12 +4,13 @@ import Features from './Features'
 import Ratings from './Ratings'
 import Footer from '../Footer'
 import SideBar from './admin/SideBar'
+import ConatctUs from './ConatctUs'
 const Home = () => {
     return (
         <div>
             <Hero />
             <Features />
-            <Ratings />
+            <ConatctUs />
         </div>
     )
 }

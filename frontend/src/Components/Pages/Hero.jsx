@@ -5,7 +5,7 @@ import Type from '../Type'
 
 const navigation = [
     { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
+    { name: 'Features', href: '/features' },
     { name: 'Marketplace', href: '#' },
     { name: 'Company', href: '#' },
 ]
@@ -38,12 +38,8 @@ export default function Hero() {
                 </div>
                 <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-[100px]">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-                        <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                            Never Miss a Beat with Our Recharge Plans{' '}
-                            <a href="#" className="font-semibold text-teal-600">
-                                <span className="absolute inset-0" aria-hidden="true" />
-                                Read more <span aria-hidden="true">&rarr;</span>
-                            </a>
+                        <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 text-3xl">
+                            Never Miss a Beat with Our Recharge Plans :)
                         </div>
                     </div>
                     <div className="text-center sm:text-5xl">
@@ -59,7 +55,7 @@ export default function Hero() {
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             <a
-                                onClick={() => navigate("/login")}
+                                onClick={() => navigate("/signup")}
                                 className="rounded-md bg-teal-600 px-10 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer "
                             >
                                 Get started

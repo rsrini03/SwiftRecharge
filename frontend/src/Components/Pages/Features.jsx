@@ -2,47 +2,43 @@ import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from
 
 const features = [
   {
-    name: 'Push to deploy',
+    name: 'Easy Accessibility',
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Access our platform effortlessly through our user-friendly website or mobile app. With intuitive interfaces and seamless navigation, recharging your mobile has never been easier.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates',
+    name: 'Secure Transactions',
     description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
+      'Our platform employs state-of-the-art encryption technology to safeguard your transactions, providing you with peace of mind every time you recharge.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple queues',
+    name: ' Flexible Recharge Plans',
     description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
+      'From prepaid to postpaid, data packs to talk-time plans, explore a variety of options tailored to suit your needs. With flexible recharge plans, you can choose what works best for you without any hassle.',
     icon: ArrowPathIcon,
   },
   {
     name: 'Advanced security',
     description:
-      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
+      'Rest assured, your payment details are safe with us.Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
     icon: FingerPrintIcon,
   },
 ]
 
 export default function Features() {
   return (
-    <div className="bg-white py-24 sm:py-32 " style={{
+    <div name="features" className="bg-white pt-4" style={{
       backgroundImage: "url(/assets/bbblurry1.svg)",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover"
     }}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className='text-center py-6'><h2 className="text-base font-semibold leading-7 text-teal-600 sm:text-3xl">Recharge faster :)</h2></div>
+        <div className='text-center py-2'><h2 className="text-base font-semibold leading-7 text-teal-600 sm:text-3xl">Recharge faster :)</h2></div>
         <div className="mx-auto max-w-2xl lg:text-center">
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need to deploy your app
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+          <p className="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Power up in a flash with our mobile recharge!
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

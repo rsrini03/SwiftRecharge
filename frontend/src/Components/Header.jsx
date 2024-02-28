@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { boolean } from 'yup'
+import { Link } from 'react-scroll'
 import DropdownMenu from './Pages/DropDown'
 
 const Header = () => {
 
     const navigation = [
-        { name: 'Available Plans', href: '#' },
-        { name: 'Features', href: '#' },
-        { name: 'Marketplace', href: '#' },
-        { name: 'Profile', href: "/profile" },
+        { name: 'Available Plans', href: 'form' },
+        { name: 'Features', href: 'features' },
+        { name: 'Contact Us', href: 'contact' },
     ]
 
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Header = () => {
 
     return (
         <header className="absolute inset-x-0 top-0 z-50">
-            <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <nav className="flex items-center justify-between p-6 lg:px-8" ariaLabel="Global">
                 <div className="flex lg:flex-1 items-center">
                     <a href="/" className="-m-1.5 p-1.5 flex items-center">
                         <span className="sr-only">SwiftRecharge</span>
@@ -41,26 +41,32 @@ const Header = () => {
                         onClick={() => setMobileMenuOpen(true)}
                     >
                         <span className="sr-only">Open main menu</span>
-                        <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon className="h-6 w-6" ariaHidden="true" />
                     </button>
                 </div>
-                <div className="hidden lg:flex lg:gap-x-12">
+                <div className="hidden lg:flex lg:gap-x-12 cursor-pointer">
                     {navigation.map((item) => (
-                        <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
-                            {item.name}
-                        </a>
+                        item.name === "Available Plans" ? (
+                            <a key={item.name} onClick={()=> navigate("/form")} className="text-sm font-semibold leading-6 text-gray-900">
+                                {item.name}
+                            </a>
+                        ) : (
+                            <Link key={item.name} smooth duration={1000} to={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+                                {item.name}
+                            </Link>
+                        )
                     ))}
                 </div>
                 {
                     email == false ? (
                         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                             <a onClick={() => navigate("/login")} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer">
-                                Log in <span aria-hidden="true">&rarr;</span>
+                                Log in <span ariaHidden="true">&rarr;</span>
                             </a>
                         </div>
 
                     ) : (
-                        <DropdownMenu/>
+                        <DropdownMenu />
                     )
                 }
             </nav>
@@ -83,7 +89,7 @@ const Header = () => {
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             <span className="sr-only">Close menu</span>
-                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                            <XMarkIcon className="h-6 w-6" ariaHidden="true" />
                         </button>
                     </div>
                     <div className="mt-6 flow-root">
