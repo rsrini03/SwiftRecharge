@@ -16,7 +16,7 @@ import com.swiftrecharge.backend.service.PaymentServiceImpl;
 import java.util.List;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("/api/v1/payments")
 public class PaymentController {
 
     @Autowired

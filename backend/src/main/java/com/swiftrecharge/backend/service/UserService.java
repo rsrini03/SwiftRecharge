@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.swiftrecharge.backend.entity.AppUser;
+import com.swiftrecharge.backend.entity.Payment;
 import com.swiftrecharge.backend.entity.Plan;
 
 public interface UserService {

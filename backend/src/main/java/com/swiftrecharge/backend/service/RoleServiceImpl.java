@@ -2,7 +2,7 @@ package com.swiftrecharge.backend.service;
 
 import org.springframework.stereotype.Service;
 
-import com.swiftrecharge.backend.dao.RoleRepo;
+import com.swiftrecharge.backend.repository.RoleRepo;
 import com.swiftrecharge.backend.entity.Role;
 
 import lombok.RequiredArgsConstructor;

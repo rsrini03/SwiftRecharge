@@ -2,6 +2,8 @@ package com.swiftrecharge.backend.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.swiftrecharge.backend.entity.Recharge;
 
 public interface RechargeService {
@@ -10,7 +12,7 @@ public interface RechargeService {
 
     Recharge getRechargeById(Long id);
 
-    Recharge createRecharge(Recharge recharge);
+    ResponseEntity<String> createRecharge(String userName, Recharge recharge);
 
     Recharge updateRecharge(Long id, Recharge recharge);
 

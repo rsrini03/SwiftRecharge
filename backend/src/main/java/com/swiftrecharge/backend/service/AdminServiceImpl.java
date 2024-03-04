@@ -9,10 +9,10 @@ import java.util.Set;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.swiftrecharge.backend.dao.AddonRepo;
-import com.swiftrecharge.backend.dao.AppUserRepo;
-import com.swiftrecharge.backend.dao.PlanRepo;
-import com.swiftrecharge.backend.dao.RoleRepo;
+import com.swiftrecharge.backend.repository.AddonRepo;
+import com.swiftrecharge.backend.repository.AppUserRepo;
+import com.swiftrecharge.backend.repository.PlanRepo;
+import com.swiftrecharge.backend.repository.RoleRepo;
 import com.swiftrecharge.backend.entity.Addon;
 import com.swiftrecharge.backend.entity.AppUser;
 import com.swiftrecharge.backend.entity.Plan;
@@ -101,5 +101,23 @@ public class AdminServiceImpl implements AdminService {
 
     public Plan getPlanById(Long id) {
         return planRepo.findById(id).get();
+    }
+
+    public boolean deletePlanById(Long id){
+        if(planRepo.findById(id).isPresent()){
+            planRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addPlan(Plan plan) {
+        return planRepo.save(plan) != null ? true : false;
+    }
+
+    @Override
+    public boolean addAddon(Addon addon) {
+        return addonRepo.save(addon) != null ? true : false;
     }
 }

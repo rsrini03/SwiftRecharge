@@ -1,4 +1,4 @@
-package com.swiftrecharge.backend.dao;
+package com.swiftrecharge.backend.repository;
 
 import java.util.List;
 

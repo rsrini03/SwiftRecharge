@@ -23,7 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.swiftrecharge.backend.dao.AppUserRepo;
+import com.swiftrecharge.backend.repository.AppUserRepo;
 import com.swiftrecharge.backend.entity.AppUser;
 import com.swiftrecharge.backend.entity.JwtRequest;
 import com.swiftrecharge.backend.entity.JwtResponse;
@@ -59,30 +59,25 @@ public class JwtService implements UserDetailsService {
 	}
 
 	public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
-
 		String userName = jwtRequest.getUserName();
 		String userPassword = jwtRequest.getUserPassword();
 
 		boolean isEmail = userName.contains("@");
+		String newUserName = isEmail ? userRepo.findByEmail(userName).getUserName() : userName;
 
-		String newUserName = null;
+		try {
+			authenticate(newUserName, userPassword);
+			final UserDetails userDetails = loadUserByUsername(newUserName);
 
-		if (isEmail) {
-			newUserName = userRepo.findByEmail(userName).getUserName();
-		} else {
-			newUserName = userName;
-		}
+			System.out.println("User Details: " + userDetails);
 
-		authenticate(newUserName, userPassword);
-
-		final UserDetails userDetails = loadUserByUsername(newUserName);
-
-		if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
-			String newGeneratedToken = jwtUtil.generateToken(userDetails);
-
-			AppUser user = userRepo.findById(newUserName).get();
-
-			return new JwtResponse(user, newGeneratedToken);
+			if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
+				String newGeneratedToken = jwtUtil.generateToken(userDetails);
+				AppUser user = userRepo.findById(newUserName).get();
+				return new JwtResponse(user, newGeneratedToken);
+			}
+		} catch (Exception ex) {
+			return new JwtResponse("Invalid Credentials !");
 		}
 
 		return new JwtResponse("Invalid Credentials !");

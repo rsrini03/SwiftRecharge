@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.swiftrecharge.backend.dao.AppUserRepo;
-import com.swiftrecharge.backend.dao.PlanRepo;
-import com.swiftrecharge.backend.dao.RoleRepo;
+import com.swiftrecharge.backend.repository.AppUserRepo;
+import com.swiftrecharge.backend.repository.PaymentRepo;
+import com.swiftrecharge.backend.repository.PlanRepo;
+import com.swiftrecharge.backend.repository.RoleRepo;
 import com.swiftrecharge.backend.entity.AppUser;
+import com.swiftrecharge.backend.entity.Payment;
 import com.swiftrecharge.backend.entity.Plan;
 import com.swiftrecharge.backend.entity.Role;
 
@@ -28,6 +30,8 @@ public class UserServiceImpl implements UserService {
 
 	private final RoleRepo roleRepo;
 
+	private final PaymentRepo paymentRepo;
+
 	private final PasswordEncoder passwordEncoder;
 
 	@Override
@@ -40,11 +44,19 @@ public class UserServiceImpl implements UserService {
 
 
 		if (existingUser != null || existingUserEmail != null) {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).header("message", "User already exists with this email")
-					.build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("User already exists with this email or username");
 		}
 
-		Role role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'USER' not found"));
+		Role role = null;
+		
+		if(user.getRole().iterator().next().getRoleName().equals("CUSTOMER")){
+			role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'CUSTOMER' not found"));
+		}
+		else{
+			role = roleRepo.findById("ADMIN").orElseThrow(() -> new RuntimeException("Role 'ADMIN' not found"));
+		}
+
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
 		user.setRole(roles);
@@ -67,10 +79,10 @@ public class UserServiceImpl implements UserService {
 		roleRepo.save(userRole);
 
 		AppUser admin = new AppUser();
-		admin.setUserName("Srini");
+		admin.setUserName("srini");
 		admin.setUserPassword(getEncodedPassword("srini12345"));
 		admin.setMobileNumber(7904161298L);
-		admin.setEmail("rsrini169@gmail.com");
+		admin.setEmail("srini@gmail.com");
 		admin.setLocation("Coimbatore");
 		Set<Role> roles = new HashSet<>();
 		roles.add(adminRole);
@@ -91,6 +103,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Plan> findPlansByOperator(String operatorName){
 		return planRepo.findByOperatorName(operatorName);
+	}
+
+	public List<Payment> getAllPaymentByUsername(String username){
+		return paymentRepo.getPaymentByUserName(username);
 	}
 
 }

@@ -17,7 +17,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    var email = false;
+    var email = true;
 
     return (
         <header className="absolute inset-x-0 top-0 z-50">
@@ -29,7 +29,6 @@ const Header = () => {
                             className="h-8 w-auto"
                             src="/assets/recharge-icon.png"
                             alt=""
-
                         />
                         <span className="ml-2 text-lg font-bold"><i>SWIFT</i><span className='text-teal-600'><i>RECHARGE</i></span></span>
                     </a>
@@ -47,7 +46,7 @@ const Header = () => {
                 <div className="hidden lg:flex lg:gap-x-12 cursor-pointer">
                     {navigation.map((item) => (
                         item.name === "Available Plans" ? (
-                            <a key={item.name} onClick={()=> navigate("/form")} className="text-sm font-semibold leading-6 text-gray-900">
+                            <a key={item.name} onClick={() => navigate("/form")} className="text-sm font-semibold leading-6 text-gray-900">
                                 {item.name}
                             </a>
                         ) : (
@@ -57,18 +56,18 @@ const Header = () => {
                         )
                     ))}
                 </div>
-                {
-                    email == false ? (
-                        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                    {
+                        email == false ? (
                             <a onClick={() => navigate("/login")} className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer">
                                 Log in <span ariaHidden="true">&rarr;</span>
                             </a>
-                        </div>
 
-                    ) : (
-                        <DropdownMenu />
-                    )
-                }
+                        ) : (
+                            <DropdownMenu />
+                        )
+                    }
+                </div>
             </nav>
             <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                 <div className="fixed inset-0 z-50" />

@@ -1,6 +1,6 @@
 package com.swiftrecharge.backend.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.swiftrecharge.backend.entity.Recharge;
 import com.swiftrecharge.backend.service.RechargeServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/recharges")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/recharges")
 public class RechargeController {
 
-    @Autowired
-    private RechargeServiceImpl rechargeService;
-
+    private final RechargeServiceImpl rechargeService;
+    
     @GetMapping("/")
     public List<Recharge> getAllRecharges() {
         return rechargeService.getAllRecharges();
@@ -32,9 +34,9 @@ public class RechargeController {
         return rechargeService.getRechargeById(id);
     }
 
-    @PostMapping("/")
-    public Recharge createRecharge(@RequestBody Recharge recharge) {
-        return rechargeService.createRecharge(recharge);
+    @PostMapping("/{username}")
+    public ResponseEntity<String> createRecharge(@PathVariable("username") String username, @RequestBody Recharge recharge) {
+        return rechargeService.createRecharge(username, recharge);
     }
 
     @PutMapping("/{id}")

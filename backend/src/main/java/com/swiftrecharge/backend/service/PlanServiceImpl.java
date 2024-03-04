@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.swiftrecharge.backend.dao.PlanRepo;
+import com.swiftrecharge.backend.repository.PlanRepo;
 import com.swiftrecharge.backend.entity.Plan;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -42,6 +43,7 @@ public class PlanServiceImpl implements PlanService {
         planRepository.deleteById(id);
     }
 
+//     @PostConstruct
     public void initializeDummyData() {
         List<Plan> dummyPlans = Arrays.asList(
                 createPlan("Prepaid", "Jio", "Gold Plan", "20 days", "1 GB/day",

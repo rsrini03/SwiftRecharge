@@ -2,7 +2,7 @@ package com.swiftrecharge.backend.service;
 
 import org.springframework.stereotype.Service;
 
-import com.swiftrecharge.backend.dao.PaymentRepo;
+import com.swiftrecharge.backend.repository.PaymentRepo;
 import com.swiftrecharge.backend.entity.Payment;
 
 import lombok.RequiredArgsConstructor;
@@ -39,4 +39,5 @@ public class PaymentServiceImpl implements PaymentService {
     public void deletePayment(Long id) {
         paymentRepository.deleteById(id);
     }
+
 }
