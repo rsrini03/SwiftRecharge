@@ -1,4 +1,4 @@
-package com.swiftrecharge.backend.entity;
+package com.swiftrecharge.backend.dto;
 
 import lombok.Builder;
 import lombok.Data;

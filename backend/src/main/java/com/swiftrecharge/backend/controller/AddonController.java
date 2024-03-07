@@ -72,4 +72,5 @@ public class AddonController {
     public void deleteAddon(@Parameter(description = "Addon ID") @PathVariable Long id) {
         addonService.deleteAddon(id);
     }
+    
 }

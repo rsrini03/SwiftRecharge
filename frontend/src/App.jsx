@@ -13,6 +13,8 @@ import PlanDetails from './Components/Pages/PlanDetails';
 import AddPlan from './Components/Pages/admin/AddPlan';
 import ConatctUs from './Components/Pages/ConatctUs';
 import AdminForm from './Components/Pages/admin/AdminForm';
+import Verify from './Components/Pages/Verify';
+import History from './Components/Pages/History';
 
 const LazyHome = lazy(() => import('./Components/Pages/Home'));
 // const LazySignin = lazy(() => import('./Components/Pages/Login'));
@@ -20,6 +22,8 @@ const LazyHome = lazy(() => import('./Components/Pages/Home'));
 const LazyProfile = lazy(() => import('./Components/Pages/Profile'));
 const LazyForm = lazy(() => import('./Components/Pages/Form'));
 const LazyPlans = lazy(() => import('./Components/Pages/PlanDetails'));
+const LazyVerify = lazy(() => import('./Components/Pages/Verify'));
+const LazyHistory = lazy(() => import('./Components/Pages/History'));
 
 function App() {
   return (
@@ -33,9 +37,12 @@ function App() {
         <Route path="/drop" element={<DropDown />} />
         <Route path="/form" element={<UserLayout component={LazyForm} />} />
         <Route path='/plans' element={<UserLayout component={LazyPlans} />} />
+        <Route path='/verify' element={<UserLayout component={LazyVerify} />} />
+        {/* <Route path='/history' element={<UserLayout component={LazyHistory} />} /> */}
         <Route path='/addplans' element={<AddPlan />} />
         <Route path='/contact' element={<ConatctUs />} />
         <Route path='/addon' element={<AdminForm />} />
+        <Route path='/history' element={<UserLayout component={LazyHistory} />} />
       </Routes>
     </Suspense>
   );

@@ -4,14 +4,40 @@ import { useFormik } from "formik";
 import { SignUpSchema } from "../../Schemas/SignUpSchema";
 import Login from "./Login";
 import Header from "../Header";
+import { useDispatch } from "react-redux";
+import Authentication from "../../services/auth/Authentication";
 export default function SignUp() {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const initialState = {
         "userName": "",
-        "password": "",
-        "confirmPassword": "",
-        "phoneNumber": ""
+        "email": "",
+        "userPassword": "",
+        "confirmuserPassword": "",
+        "mobileNumber": "",
+        "location": ""
+
+    }
+
+    const eventSignUp = async () => {
+
+        const data = {
+
+            "userName": values.userName,
+            "email": values.email,
+            "userPassword": values.userPassword,
+            "mobileNumber": values.mobileNumber,
+            "location": values.location,
+        }
+        const response = await Authentication.register(data);
+        console.log(response);
+
+
+
+
+        console.log(values);
 
     }
 
@@ -21,7 +47,7 @@ export default function SignUp() {
             validationSchema: SignUpSchema,
             onSubmit: (values, action) => {
                 console.log(values);
-                eventLogin();
+                eventSignUp();
                 action.resetForm();
             }
         })
@@ -54,7 +80,8 @@ export default function SignUp() {
                                         type="userName"
                                         autoComplete="userName"
                                         onChange={handleChange}
-                                        onSubmit={handleSubmit}
+                                        onBlur={handleBlur}
+                                        value={values.userName}
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
                                     />
                                 </div>
@@ -62,27 +89,47 @@ export default function SignUp() {
                             {errors.userName && touched.userName ? (
                                 <p style={{ color: "red" }}>{errors.userName}</p>
                             ) : null}
+
                             <div>
-                                <div className="flex items-center justify-between">
-                                    <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Password
-                                    </label>
-                                </div>
+                                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                                    Email
+                                </label>
                                 <div className="mt-2">
                                     <input
-                                        id="password"
-                                        name="password"
-                                        type="password"
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        autoComplete="current-password"
+                                        value={values.email}
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
                                     />
                                 </div>
                             </div>
 
-                            {errors.password && touched.password ? (
-                                <p style={{ color: "red" }}>{errors.password}</p>
+                            <div>
+                                <div className="flex items-center justify-between">
+                                    <label htmlFor="userPassword" className="block text-sm font-medium leading-6 text-gray-900">
+                                        userPassword
+                                    </label>
+                                </div>
+                                <div className="mt-2">
+                                    <input
+                                        id="userPassword"
+                                        name="userPassword"
+                                        type="password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.userPassword}
+                                        autoComplete="current-userPassword"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
+                                    />
+                                </div>
+                            </div>
+
+                            {errors.userPassword && touched.userPassword ? (
+                                <p style={{ color: "red" }}>{errors.userPassword}</p>
                             ) : null}
 
                             <div>
@@ -95,10 +142,11 @@ export default function SignUp() {
                                     <input
                                         id="confirmPassword"
                                         name="confirmPassword"
-                                        type="confirmPassword"
+                                        type="Password"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        autoComplete="current-password"
+                                        value={values.confirmPassword}
+                                        autoComplete="current-Password"
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
                                     />
                                 </div>
@@ -108,26 +156,49 @@ export default function SignUp() {
                             ) : null}
 
                             <div>
-                                <label htmlFor="phoneNumber" className="block text-sm font-medium leading-6 text-gray-900">
+                                <label htmlFor="mobileNumber" className="block text-sm font-medium leading-6 text-gray-900">
                                     Mobile Number
                                 </label>
                                 <div className="mt-2">
                                     <input
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        type="phoneNumber"
-                                        autoComplete="phoneNumber"
+                                        id="mobileNumber"
+                                        name="mobileNumber"
+                                        type="mobileNumber"
+                                        autoComplete="mobileNumber"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
+                                        value={values.mobileNumber}
                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
                                     />
                                 </div>
                             </div>
 
-                            {errors.phoneNumber && touched.phoneNumber ? (
-                                <p style={{ color: "red" }}>{errors.phoneNumber}</p>
+                            {errors.mobileNumber && touched.mobileNumber ? (
+                                <p style={{ color: "red" }}>{errors.mobileNumber}</p>
                             ) : null}
 
+                            <div>
+                                <div className="flex items-center justify-between">
+                                    <label htmlFor="location" className="block text-sm font-medium leading-6 text-gray-900">
+                                        Location
+                                    </label>
+                                </div>
+                                <div className="mt-2">
+                                    <input
+                                        id="location"
+                                        name="location"
+                                        type="location"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.location}
+                                        autoComplete="current-location"
+                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 pl-3"
+                                    />
+                                </div>
+                            </div>
+                            {errors.location && touched.location ? (
+                                <p style={{ color: "red" }}>{errors.location}</p>
+                            ) : null}
 
                             <div>
                                 <button

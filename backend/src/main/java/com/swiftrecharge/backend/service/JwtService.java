@@ -24,9 +24,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.swiftrecharge.backend.repository.AppUserRepo;
+import com.swiftrecharge.backend.dto.JwtRequest;
+import com.swiftrecharge.backend.dto.JwtResponse;
 import com.swiftrecharge.backend.entity.AppUser;
-import com.swiftrecharge.backend.entity.JwtRequest;
-import com.swiftrecharge.backend.entity.JwtResponse;
 import com.swiftrecharge.backend.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;

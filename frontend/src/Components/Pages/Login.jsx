@@ -2,17 +2,20 @@ import React from "react"
 import { useNavigate } from "react-router"
 import { SignInSchema } from "../../Schemas/SignInSchema";
 import { useFormik } from "formik"
-import Header from "../Header";
-
+import Authentication from "../../services/auth/Authentication";
+import { useDispatch } from "react-redux";
+import { addToken, addUserDetails } from "../../config/GlobalSlice";
 
 export default function Login() {
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const initialState = {
     "userName": "",
     "password": ""
-
   }
+
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
@@ -25,6 +28,22 @@ export default function Login() {
       }
     })
 
+  const eventLogin = async () => {
+
+    console.log(values);
+
+    const response = await Authentication.login(values.userName, values.password);
+
+    console.log(response);
+    const user = response.data.user;
+    const token = response.data.jwtToken;
+    const role = response.data.user.role[0].roleName;
+
+    dispatch(addUserDetails(user));
+    dispatch(addToken(token));
+
+    
+  }
   return (
 
     <>
@@ -32,7 +51,7 @@ export default function Login() {
         backgroundImage: "url(/assets/bbblurry.svg)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        minHeight:"100vh"
+        minHeight: "100vh"
       }}>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <img class="mx-auto h-10 w-auto" src="/assets/recharge-icon.png" alt="Your Company" />
@@ -45,7 +64,7 @@ export default function Login() {
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
-              <div> 
+              <div>
                 <label htmlFor="userName" className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Email/UserName

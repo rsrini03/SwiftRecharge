@@ -13,5 +13,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Restricted Zone: " + ex.getMessage());
     }
-
+    
 }
+
+
