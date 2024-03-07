@@ -6,6 +6,7 @@ import Login from "./Login";
 import Header from "../Header";
 import { useDispatch } from "react-redux";
 import Authentication from "../../services/auth/Authentication";
+import Swal from 'sweetalert2'
 export default function SignUp() {
 
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export default function SignUp() {
         "userName": "",
         "email": "",
         "userPassword": "",
-        "confirmuserPassword": "",
+        "confirmPassword": "",
         "mobileNumber": "",
         "location": ""
 
@@ -34,10 +35,21 @@ export default function SignUp() {
         const response = await Authentication.register(data);
         console.log(response);
 
+        if (response.status === 201) {
 
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Successfully registered !",
+                showConfirmButton: false,
+                timer: 2000
+            });
 
+            setTimeout(() =>{
+                navigate("/login");
+            },2000)
+        }
 
-        console.log(values);
 
     }
 
@@ -46,7 +58,7 @@ export default function SignUp() {
             initialValues: initialState,
             validationSchema: SignUpSchema,
             onSubmit: (values, action) => {
-                console.log(values);
+                // console.log(values);
                 eventSignUp();
                 action.resetForm();
             }

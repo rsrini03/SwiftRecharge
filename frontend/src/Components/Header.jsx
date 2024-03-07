@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { boolean } from 'yup'
 import { Link } from 'react-scroll'
 import DropdownMenu from './Pages/DropDown'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
 
@@ -17,7 +18,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    var email = false;
+    const {isLoggedIn} = useSelector(state=> state.global);
 
     return (
         <header className="absolute inset-x-0 top-0 z-50">
@@ -58,7 +59,7 @@ const Header = () => {
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     {
-                        email == false ? (
+                        isLoggedIn == false ? (
                             <a onClick={() => navigate("/login")} href="#_" class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-teal-600 active:shadow-none shadow-lg bg-gradient-to-tr from-teal-600 to-teal-500 border-teal-700 text-white">
                                 <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
                                 <span class="relative">Log In</span>

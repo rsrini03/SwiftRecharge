@@ -4,13 +4,15 @@ import { SignInSchema } from "../../Schemas/SignInSchema";
 import { useFormik } from "formik"
 import Authentication from "../../services/auth/Authentication";
 import { useDispatch } from "react-redux";
-import { addToken, addUserDetails } from "../../config/GlobalSlice";
+import { addToken, addUserDetails, toggleLogin } from "../../config/GlobalSlice";
+import Swal from "sweetalert2";
 
 export default function Login() {
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
   const initialState = {
     "userName": "",
     "password": ""
@@ -22,7 +24,7 @@ export default function Login() {
       initialValues: initialState,
       validationSchema: SignInSchema,
       onSubmit: (values, action) => {
-        console.log(values);
+        // console.log(values);
         eventLogin();
         action.resetForm();
       }
@@ -34,15 +36,52 @@ export default function Login() {
 
     const response = await Authentication.login(values.userName, values.password);
 
-    console.log(response);
-    const user = response.data.user;
-    const token = response.data.jwtToken;
-    const role = response.data.user.role[0].roleName;
+    if (response.status === 200) {
 
-    dispatch(addUserDetails(user));
-    dispatch(addToken(token));
+      const user = response.data.user;
+      const token = response.data.jwtToken;
+      const role = response.data.user.role[0].roleName;
 
-    
+      dispatch(addUserDetails(user));
+      dispatch(addToken(token));
+      dispatch(toggleLogin(true));
+
+      if(role==="CUSTOMER"){
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully loggedin:)",
+          showConfirmButton: false,
+          timer: 2000
+        });
+        setTimeout(()=>{
+          navigate("/");
+        },2000)
+      }
+      else{
+        Swal.fire({
+
+          position: "center",
+          icon: "success",
+          title: "Successfully loggedin:)",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTimeout(()=>{
+          navigate("/dashboard");
+        },2000)
+
+      }
+    }
+    else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Invalid credentials",
+      });
+    }
+
   }
   return (
 
