@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 const Header = () => {
 
     const navigation = [
-        { name: 'Available Plans', href: 'form' },
+        { name: 'Available Plans', href: 'verify' },
         { name: 'Features', href: 'features' },
         { name: 'Contact Us', href: 'contact' },
     ]

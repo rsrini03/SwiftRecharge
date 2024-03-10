@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleLogin } from '../../config/GlobalSlice';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function DropdownMenu() {
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ function DropdownMenu() {
                             view profile
                         </span>
                     </a>
-                    <a href="#" className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                    <a onClick={()=> navigate("/history")} className="flex items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><circle cx="12" cy="12" r="9" fill="#0d9488" opacity="0.16" /><path stroke="#0d9488" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364A9 9 0 1 0 3 12.004V14" /><path stroke="#0d9488" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 12l2 2l2-2m6-4v5h5" /></g></svg>
                         <span className="mx-1">
                             Payment History

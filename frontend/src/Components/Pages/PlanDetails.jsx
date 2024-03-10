@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState} from 'react'
 import Tabs from './admin/Tabs'
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2'
+
 
 const PlanDetails = () => {
+
+    const [openTab, setOpenTab] = useState(1);
+
+    const { operator } = useParams();
+
+    const { accessToken, isLoggedIn, userDetails } = useSelector((state) => state.global);
+
+
     return (
         <div className='pt-20' >
             <div className='flex flex-col md:flex-row h-screen w-full'>
@@ -13,34 +25,31 @@ const PlanDetails = () => {
                                 aria-hidden="true"
                             >
                                 <div className="flex items-center gap-1">
-                                    <img src="/assets/Airtel.png"/>
+                                    <img src="/assets/Airtel.png" />
                                 </div>
                             </div>
 
                             <div>
                                 <strong
-                                    className="rounded border border-purple bg-purple px-3 py-1.5 text-[10px] font-medium text-white font-anuphan"
-                                >
-                                    6369442740
-                                </strong>
+                                        className="rounded border border-purple bg-purple px-3 py-1.5 text-[10px] font-medium text-white font-anuphan"
+                                    >
+                                        {userDetails.mobileNumber}
+                                    </strong>
 
                                 <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                                    <p className="font-poppins"> Airtel</p>
+                                    <p className="font-poppins"> {operator} </p>
                                 </h3>
 
                                 <p className="mt-1 text-sm text-gray-700 font-anuphan">
-                                    Airtel Prepaid | Tamil Nadu
+                                {operator} Prepaid | Tamil Nadu
                                 </p>
                             </div>
                         </div>
                     </article>
                 </div>
                 <div className="md:w-full bg-gray-200 py-4 px-4 overflow-y-auto">
-                    <div className="mb-4">
-                        <input type="text" placeholder="Search for a plan,eg.199" className="w-full p-4 border border-gray-300 rounded-lg" />
-                    </div>
                     {/* <Tabs openTab={openTab} setOpenTab={setOpenTab} operatorName={operatorName} accessToken={accessToken} /> */}
-                    <Tabs/>
+                    <Tabs openTab={openTab} setOpenTab={setOpenTab} operatorName={operator} accessToken={accessToken} />
                 </div>
             </div>
         </div>
